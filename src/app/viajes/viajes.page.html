@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button fill="clear" slot="start" routerLink="/perfil"></ion-back-button>
+
+    <ion-title>Viajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list style="background-color: #6b4f9a00;" *ngIf="viajes.length > 0; else noData" id="main-content">
+    <ion-card *ngFor="let viaje of viajes" (click)="viaje.expandido = !viaje.expandido" class="viaje-card">
+      <ion-card-header>
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3" class="image-col">
+              <img src="/assets/img/logo-tllevo.png" alt="Travel Image" class="viaje-image" />
+            </ion-col>
+            <ion-col size="6">
+              <ion-card-subtitle>{{ viaje.origen }} → {{ viaje.destino }}</ion-card-subtitle>
+              <ion-text>Viaje </ion-text>
+            </ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-text class="price">{{ viaje.tarifa }} $</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content *ngIf="viaje.expandido">
+        <p *ngIf="viaje.detalles && viaje.detalles.length > 0; else noDetails">{{ viaje.detalles }}</p>
+        <ng-template #noDetails>
+          <p>No hay detalles disponibles.</p>
+        </ng-template>
+        <ion-button expand="block" (click)="contratar(viaje)" class="solicitar-btn">Solicitar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noData>
+    <div class="empty-state">
+      <ion-icon name="document-outline" size="large" color="medium"></ion-icon>
+      <p>No hay viajes registrados.</p>
+    </div>
+  </ng-template>
+</ion-content>
