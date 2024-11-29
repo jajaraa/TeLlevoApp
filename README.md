@@ -1,3 +1,8 @@
+Dependencias necesarias: npm install @ionic/storage-angular
+npm install @ionic-native/geolocation --legacy-peer.deps
+npm install cordova-plugin-geolocation --legacy-peer-deps
+npm install @ionic-native/core
+
 Extensiones en Uso <br>
 
 Ionic <br>
